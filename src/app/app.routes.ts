@@ -1,3 +1,48 @@
 import { Routes } from '@angular/router';
+import {Login} from "./authentication/login/login";
+import {Register} from "./authentication/register/register";
 
-export const routes: Routes = [];
+import {Usermanagement} from "./settings/usermanagement/usermanagement";
+import {UsermanagementManage} from "./settings/usermanagement/usermanagement-manage/usermanagement-manage";
+import {Permissions} from "./settings/permissions/permissions";
+import {PermissionsManage} from "./settings/permissions/permissions-manage/permissions-manage";
+
+export const routes: Routes = [
+
+
+    {
+        path: '',
+        component:Login
+    },
+    {
+        path: 'new/register',
+        component:Register
+    },
+    {
+        path: 'settings/userManagement',
+        component:Usermanagement
+    },
+
+
+    {
+        path: 'settings/userManagement/manage',
+        component:UsermanagementManage
+    },
+
+    {
+        path: 'settings/userManagement/:id',
+        component:Usermanagement
+    },
+    {
+        path: 'settings/permissions',
+        component:Permissions
+    },
+    {
+        path: 'settings/permissions/manage',
+        component:PermissionsManage
+    },
+    {
+        path: 'settings/permissions/:id',
+        component:Permissions
+    },
+];

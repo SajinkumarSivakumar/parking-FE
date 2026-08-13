@@ -1,0 +1,376 @@
+<app-shared></app-shared>
+<br><br><br>
+
+<div class="min-h-screen bg-gray-100 p-8">
+
+    <!-- Header -->
+    <div class="bg-white rounded-2xl shadow-lg p-6 mb-6">
+
+        <div class="flex flex-col md:flex-row justify-between items-center">
+
+            <div>
+                <p class="text-gray-500 text-sm font-medium">
+                    Settings / Roles & Permissions
+                </p>
+
+                <h1 class="text-4xl font-bold text-gray-800 mt-2">
+                    Roles & Permissions
+                </h1>
+
+                <p class="text-gray-500 mt-2">
+                    Manage all users, update information and monitor status.
+                </p>
+            </div>
+
+
+            <div class="flex gap-3">
+
+                <button (click)="goToManage()"
+                        class="px-5 py-2.5 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-semibold transition duration-300 cursor-pointer">
+                    Go To Manage
+                </button>
+
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- User Role Filter -->
+    <form [formGroup]="roles" class="bg-white rounded-2xl shadow-lg p-6">
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+            <!-- Username -->
+            <div class="relative">
+
+                <label class="block text-sm font-semibold text-gray-700 mb-2">
+                    User Name
+                </label>
+
+                <!-- Input + Arrow -->
+                <div
+                        class="relative cursor-pointer"
+                        (click)="toggleUserDropdown()">
+
+                    <input formControlName="userName"
+                            type="text"
+                            placeholder="Search user..."
+                            readonly
+                            class="w-full h-12 px-4 pr-12
+                   border border-gray-300
+                   rounded-xl
+                   bg-white
+                   text-sm text-gray-700
+                   placeholder-gray-400
+                   outline-none
+                   cursor-pointer
+                   focus:border-blue-500
+                   focus:ring-4 focus:ring-blue-100"
+                    />
+
+                    <!-- Arrow -->
+                    <div
+                            class="absolute right-0 top-0
+                   h-12 w-12
+                   flex items-center justify-center
+                   text-gray-400">
+
+                        <svg
+                                class="w-5 h-5 transition-transform duration-200"
+                                [class.rotate-180]="showUserDropdown"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24">
+
+                            <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="m19 9-7 7-7-7">
+                            </path>
+
+                        </svg>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Dropdown -->
+                <div
+                        *ngIf="showUserDropdown"
+                        class="absolute z-50 left-0 right-0 mt-2
+           bg-white
+           border border-gray-200
+           rounded-xl
+           shadow-lg
+           max-h-60
+           overflow-y-auto">
+
+                    <div
+                            *ngFor="let user of userList"
+                            (click)="selectUser(user)"
+                            class="px-4 py-3
+               text-sm text-gray-700
+               cursor-pointer
+               hover:bg-blue-50
+               hover:text-blue-700
+               transition">
+
+                        {{ user.email }}
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- Role -->
+            <div>
+
+                <label class="block text-sm font-semibold text-gray-700 mb-2">
+                    Role
+                </label>
+
+                <select formControlName="role"
+                        class="w-full h-12 px-4
+                           border border-gray-300
+                           rounded-xl
+                           bg-white
+                           text-sm text-gray-700
+                           outline-none
+                           cursor-pointer
+                           transition-all duration-200
+                           focus:border-blue-500
+                           focus:ring-4 focus:ring-blue-100">
+
+                    <option value="">
+                        Select Role
+                    </option>
+
+                    <option>
+                        Admin
+                    </option>
+
+                    <option>
+                        Manager
+                    </option>
+
+                    <option>
+                        User
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <!-- Status -->
+            <div>
+
+                <label class="block text-sm font-semibold text-gray-700 mb-2">
+                    Status
+                </label>
+
+                <select formControlName="status"
+                        class="w-full h-12 px-4
+                           border border-gray-300
+                           rounded-xl
+                           bg-white
+                           text-sm text-gray-700
+                           outline-none
+                           cursor-pointer
+                           transition-all duration-200
+                           focus:border-blue-500
+                           focus:ring-4 focus:ring-blue-100">
+
+                    <option value="">
+                        Select Status
+                    </option>
+
+                    <option>
+                        Active
+                    </option>
+
+                    <option>
+                        Inactive
+                    </option>
+
+                </select>
+
+            </div>
+
+        </div>
+
+    </form>
+
+
+
+<!--    menu Details -->
+
+
+    <!-- Permission Matrix -->
+    <div class="bg-white rounded-2xl shadow-lg mt-6 overflow-hidden">
+
+        <!-- Table Header -->
+        <div class="px-6 py-5 border-b border-gray-200
+                flex items-center justify-between">
+
+            <div>
+                <h2 class="text-lg font-bold text-gray-800">
+                    Menu Permissions
+                </h2>
+
+                <p class="text-sm text-gray-500 mt-1">
+                    Manage access permissions for the selected user.
+                </p>
+            </div>
+
+            <div class="flex items-center gap-2">
+
+            <span class="px-3 py-1.5 rounded-full
+                         bg-blue-50 text-blue-600
+                         text-xs font-semibold">
+                Permissions
+            </span>
+
+            </div>
+
+        </div>
+
+
+        <!-- Permission Table -->
+        <div class="overflow-x-auto">
+
+            <table class="w-full text-sm">
+
+                <thead>
+                <tr class="bg-gray-50 border-b border-gray-200">
+
+                    <th class="text-left px-6 py-4
+                               font-semibold text-gray-600">
+                        Menu
+                    </th>
+
+                    <th class="text-center px-6 py-4
+                               font-semibold text-gray-600">
+                        View
+                    </th>
+
+
+
+
+                </tr>
+                </thead>
+
+
+                <tbody class="divide-y divide-gray-100">
+
+                <tr *ngFor="let menu of menuPermissions"
+                    class="hover:bg-gray-50 transition">
+
+                    <!-- Menu -->
+                    <td class="px-6 py-4">
+
+                        <div class="flex items-center gap-3">
+
+                            <!-- Icon -->
+                            <div
+                                    class="w-9 h-9 rounded-lg
+                       bg-blue-50
+                       flex items-center justify-center
+                       text-lg">
+
+                                {{ menu.icon }}
+
+                            </div>
+
+                            <!-- Menu Name -->
+                            <span class="font-medium text-gray-800">
+                {{ menu.menuName }}
+            </span>
+
+                        </div>
+
+                    </td>
+
+
+                    <!-- View -->
+                    <td class="text-center">
+
+                        <input
+                                type="checkbox"
+                                [(ngModel)]="menu.view"
+                                class="w-4 h-4 accent-blue-600 cursor-pointer">
+
+                    </td>
+
+
+
+
+
+
+
+                </tr>
+
+
+
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+
+        <!-- Footer -->
+        <div class="px-6 py-4 bg-gray-50
+                border-t border-gray-200
+                flex justify-end gap-3">
+
+            <button
+                    type="button"
+                    class="px-5 py-2.5 rounded-xl
+                   border border-gray-300
+                   text-gray-600
+                   text-sm font-semibold
+                   hover:bg-gray-100
+                   transition">
+                Cancel
+            </button>
+
+            <button *ngIf="this.updatepage==false" (click)="savepermissions()"
+                    type="button"
+                    class="px-5 py-2.5 rounded-xl
+                   bg-blue-600
+                   text-white
+                   text-sm font-semibold
+                   shadow-sm
+                   hover:bg-blue-700
+                   transition cursor-pointer">
+                Save Permissions
+            </button>
+
+
+            <button *ngIf="this.updatepage==true" (click)="updatepermissions()"
+                    type="button"
+                    class="px-5 py-2.5 rounded-xl
+                   bg-blue-600
+                   text-white
+                   text-sm font-semibold
+                   shadow-sm
+                   hover:bg-blue-700
+                   transition cursor-pointer">
+                Update Permissions
+            </button>
+
+        </div>
+
+    </div>
+
+</div>

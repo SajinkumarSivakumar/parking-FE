@@ -1,0 +1,424 @@
+<app-shared></app-shared>
+<br><br><br>
+<div class="min-h-screen bg-slate-100">
+
+    <!-- Header -->
+    <div class="bg-white border-b shadow-sm px-8 py-5 flex items-center justify-between">
+
+        <div>
+            <p class="text-sm text-slate-500">
+                Settings / User Management
+            </p>
+
+            <h1 class="text-3xl font-bold text-slate-800 mt-1">
+                Add New User
+            </h1>
+        </div>
+
+        <div class="flex gap-3">
+
+            <button (click)="goToManage()"
+                    class="px-5 py-2.5 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-semibold transition duration-300 cursor-pointer">
+                Go To Manage
+            </button>
+            <button
+                    (click)="saveUser()"
+                    class="px-6 py-2.5 rounded-lg bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white font-semibold shadow-lg transition-all duration-300 cursor-pointer">
+                Save User
+            </button>
+
+
+
+        </div>
+
+    </div>
+
+    <div class="p-8">
+
+        <div class="grid lg:grid-cols-4 gap-8">
+
+            <!-- Left Profile Card -->
+
+            <div>
+
+                <div class="bg-white rounded-2xl shadow border p-6">
+
+                    <div class="flex justify-center">
+
+                        <img
+                                *ngIf="imageUrl; else defaultImage"
+                                [src]="imageUrl"
+                                class="w-32 h-32 rounded-full object-cover border-4 border-cyan-500 shadow-lg">
+
+                        <ng-template #defaultImage>
+
+                            <div
+                                    class="w-32 h-32 rounded-full bg-slate-200 flex items-center justify-center text-5xl">
+
+                                👤
+
+                            </div>
+
+                        </ng-template>
+
+                    </div>
+
+                    <input
+                        #fileInput
+                        type="file"
+                        accept="image/*"
+                        (change)="onFileSelected($event)"
+                        hidden
+                    />
+
+                    <button
+                            type="button"
+                            (click)="fileInput.click()"
+                            class="mt-5 w-full py-2 rounded-lg bg-cyan-600 text-white hover:bg-cyan-700">
+                        Upload Photo
+                    </button>
+
+                    <div class="mt-8 space-y-4">
+
+                        <div>
+
+                            <p class="text-xs text-slate-400">
+                                Employee ID
+                            </p>
+
+                            <h3 class="font-semibold">
+                                EMP-1001
+                            </h3>
+
+                        </div>
+
+                        <div>
+
+                            <p class="text-xs text-slate-400">
+                                Status
+                            </p>
+
+                            <span
+                                    class="inline-block mt-1 px-3 py-1 rounded-full bg-green-100 text-green-700 text-sm">
+
+                                Active
+
+                            </span>
+
+                        </div>
+
+                        <div>
+
+                            <p class="text-xs text-slate-400">
+                                Role
+                            </p>
+
+                            <h3 class="font-semibold">
+                              {{roleInfo}}
+                            </h3>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- Right Form -->
+
+
+
+            <form [formGroup]="userManagement" class="lg:col-span-3 space-y-8">
+
+                <!-- Personal -->
+
+                <div class="bg-white rounded-2xl shadow border">
+
+                    <div class="border-b px-6 py-4">
+
+                        <h2 class="font-bold text-xl">
+
+                            Personal Information
+
+                        </h2>
+
+                    </div>
+
+                    <div class="p-6 grid md:grid-cols-2 xl:grid-cols-3 gap-5">
+
+                        <div>
+                            <label class="text-sm text-slate-600">
+                                First Name
+                            </label>
+
+                            <input formControlName="firstName"
+                                    class="mt-2 w-full rounded-xl border border-slate-300 px-4 py-3 focus:ring-2 focus:ring-cyan-500 outline-none"
+                                    placeholder="John">
+
+                            <p
+                                    *ngIf="userManagement.get('firstName')?.hasError('required') && userManagement.get('firstName')?.touched"
+                                    class="text-red-500 text-sm mt-1"
+                            >
+                                First Name is Required
+                            </p>
+                        </div>
+
+                        <div>
+                            <label class="text-sm text-slate-600">
+                                Last Name
+                            </label>
+
+                            <input formControlName="lastName"
+                                    class="mt-2 w-full rounded-xl border border-slate-300 px-4 py-3"
+                                    placeholder="David">
+
+                            <p
+                                    *ngIf="userManagement.get('lastName')?.hasError('required') && userManagement.get('lastName')?.touched"
+                                    class="text-red-500 text-sm mt-1"
+                            >
+                                Last Name is Required
+                            </p>
+                        </div>
+
+                        <div>
+                            <label class="text-sm text-slate-600">
+                                Mobile
+                            </label>
+
+                            <input formControlName="mobile"
+                                    class="mt-2 w-full rounded-xl border border-slate-300 px-4 py-3"
+                                    placeholder="+91 9876543210">
+
+                            <p
+                                    *ngIf="userManagement.get('mobile')?.hasError('required') && userManagement.get('mobile')?.touched"
+                                    class="text-red-500 text-sm mt-1"
+                            >
+                                Mobile is Required
+                            </p>
+                        </div>
+
+
+                        <div>
+                            <label class="text-sm text-slate-600">
+                                Date Of Birth
+                            </label>
+
+                            <input formControlName="dob"
+                                    type="date"
+                                    class="mt-2 w-full rounded-xl border border-slate-300 px-4 py-3">
+
+
+                        </div>
+
+                        <div>
+                            <label class="text-sm text-slate-600">
+                                Gender
+                            </label>
+
+                            <select formControlName="gender"
+                                    class="mt-2 w-full rounded-xl border border-slate-300 px-4 py-3">
+
+                                <option>Male</option>
+                                <option>Female</option>
+
+                            </select>
+
+                            <p
+                                    *ngIf="userManagement.get('gender')?.hasError('required') && userManagement.get('gender')?.touched"
+                                    class="text-red-500 text-sm mt-1"
+                            >
+                                Gender is Required
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- Login -->
+
+                <div class="bg-white rounded-2xl shadow border">
+
+                    <div class="border-b px-6 py-4">
+
+                        <h2 class="font-bold text-xl">
+
+                            Login Information
+
+                        </h2>
+
+                    </div>
+
+                    <div class="p-6 grid md:grid-cols-3 gap-5">
+
+
+                        <div>
+                            <label class="text-sm text-slate-600">
+                                Email
+                            </label>
+
+                            <input formControlName="email"
+                                   class="mt-2 w-full rounded-xl border border-slate-300 px-4 py-3"
+                                   placeholder="john@gmail.com">
+                            <p
+                                    *ngIf="userManagement.get('email')?.hasError('required') && userManagement.get('email')?.touched"
+                                    class="text-red-500 text-sm mt-1"
+                            >
+                                Email is Required
+                            </p>
+                        </div>
+
+
+                        <div>
+
+                            <label>Password</label>
+
+                            <input formControlName="password"
+                                    type="password"
+                                    class="mt-2 w-full rounded-xl border border-slate-300 px-4 py-3">
+
+                            <p
+                                    *ngIf="userManagement.get('password')?.hasError('required') && userManagement.get('password')?.touched"
+                                    class="text-red-500 text-sm mt-1"
+                            >
+                                Password is Required
+                            </p>
+
+                        </div>
+
+                        <div>
+
+                            <label>Confirm Password</label>
+
+                            <input formControlName="confirmPassword"
+                                    type="password"
+                                    class="mt-2 w-full rounded-xl border border-slate-300 px-4 py-3">
+
+                            <p
+                                    *ngIf="userManagement.get('confirmPassword')?.hasError('required') && userManagement.get('confirmPassword')?.touched"
+                                    class="text-red-500 text-sm mt-1"
+                            >
+                               Confirm Password is Required
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- Company -->
+
+                <div class="bg-white rounded-2xl shadow border">
+
+                    <div class="border-b px-6 py-4">
+
+                        <h2 class="font-bold text-xl">
+
+                            Company Information
+
+                        </h2>
+
+                    </div>
+
+                    <div class="p-6 grid md:grid-cols-2 xl:grid-cols-4 gap-5">
+
+                        <div>
+
+                            <label>Branch</label>
+
+                            <select formControlName="branch"
+                                    class="mt-2 w-full rounded-xl border border-slate-300 px-4 py-3">
+
+                                <option>Bangalore</option>
+                                <option>Salem</option>
+
+                            </select>
+
+                            <p
+                                    *ngIf="userManagement.get('branch')?.hasError('required') && userManagement.get('branch')?.touched"
+                                    class="text-red-500 text-sm mt-1"
+                            >
+                                Branch is Required
+                            </p>
+
+                        </div>
+
+                        <div>
+
+                            <label>Department</label>
+
+                            <input formControlName="department"
+                                    class="mt-2 w-full rounded-xl border border-slate-300 px-4 py-3">
+
+                        </div>
+
+                        <div>
+
+                            <label>Role</label>
+
+                            <select formControlName="role"
+                                    class="mt-2 w-full rounded-xl border border-slate-300 px-4 py-3">
+
+                                <option>Admin</option>
+                                <option>Employee</option>
+
+                            </select>
+
+                            <p
+                                    *ngIf="userManagement.get('role')?.hasError('required') && userManagement.get('role')?.touched"
+                                    class="text-red-500 text-sm mt-1"
+                            >
+                                Role is Required
+                            </p>
+
+
+                        </div>
+
+                        <div>
+
+                            <label>Joining Date</label>
+
+                            <input formControlName="joiningDate"
+                                    type="date"
+                                    class="mt-2 w-full rounded-xl border border-slate-300 px-4 py-3">
+
+                        </div>
+
+
+
+                        <div>
+
+                            <label>Status</label>
+
+                            <select formControlName="status"
+                                    class="mt-2 w-full rounded-xl border border-slate-300 px-4 py-3">
+
+                                <option>Active</option>
+                                <option>InActive</option>
+
+                            </select>
+
+                            <p
+                                    *ngIf="userManagement.get('status')?.hasError('required') && userManagement.get('status')?.touched"
+                                    class="text-red-500 text-sm mt-1"
+                            >
+                                Status is Required
+                            </p>
+
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>

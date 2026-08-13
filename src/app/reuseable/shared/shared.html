@@ -1,0 +1,225 @@
+<!-- HEADER -->
+<header class="fixed top-0 left-0 right-0 h-16 bg-slate-900 text-white flex items-center justify-between px-6 shadow-lg z-50">
+
+    <div class="flex items-center gap-4">
+        <button
+                (click)="toggleSidebar()"
+                class="w-10 h-10 rounded-lg hover:bg-slate-700 transition flex items-center justify-center">
+
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6"
+                 fill="none" viewBox="0 0 24 24"
+                 stroke="currentColor">
+
+                <path stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M4 6h16M4 12h16M4 18h16"/>
+
+            </svg>
+
+        </button>
+
+        <div>
+            <h2 class="text-xl font-bold text-cyan-400">
+                Car Parking
+            </h2>
+            <p class="text-xs text-gray-400">
+                Management System
+            </p>
+        </div>
+
+    </div>
+
+    <div class="text-sm text-gray-300">
+        Welcome Admin 👋
+    </div>
+
+</header>
+
+
+<!-- SIDEBAR -->
+
+<div
+
+        class="fixed left-0 top-16 w-72 h-[calc(100vh-64px)] bg-slate-900 text-white shadow-2xl transition-all duration-300 z-40"
+
+        [ngClass]="isSidebarOpen ? 'translate-x-0' : '-translate-x-full'">
+
+    <div class="p-6">
+
+        <div class="flex items-center gap-4">
+
+            <div class="w-14 h-14 rounded-full bg-cyan-500 flex items-center justify-center text-2xl">
+
+                🚗
+
+            </div>
+
+            <div>
+
+                <h3 class="font-bold text-lg">
+                    Parking Admin
+                </h3>
+
+                <p class="text-gray-400 text-sm">
+                    administrator
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="border-b border-slate-700"></div>
+
+    <nav class="mt-5 px-3 space-y-2">
+
+        <a class="flex items-center gap-4 px-4 py-3 rounded-xl cursor-pointer bg-cyan-600 shadow-lg">
+
+            <span>🏠</span>
+
+            <span>Dashboard</span>
+
+        </a>
+
+        <a class="flex items-center gap-4 px-4 py-3 rounded-xl hover:bg-slate-800 transition cursor-pointer">
+
+            <span>🚗</span>
+
+            <span>Vehicle Entry</span>
+
+        </a>
+
+        <a class="flex items-center gap-4 px-4 py-3 rounded-xl hover:bg-slate-800 transition cursor-pointer">
+
+            <span>🚙</span>
+
+            <span>Vehicle Exit</span>
+
+        </a>
+
+        <a class="flex items-center gap-4 px-4 py-3 rounded-xl hover:bg-slate-800 transition cursor-pointer">
+
+            <span>🅿️</span>
+
+            <span>Parking Slots</span>
+
+        </a>
+
+        <a class="flex items-center gap-4 px-4 py-3 rounded-xl hover:bg-slate-800 transition cursor-pointer">
+
+            <span>👤</span>
+
+            <span>Customers</span>
+
+        </a>
+
+        <a class="flex items-center gap-4 px-4 py-3 rounded-xl hover:bg-slate-800 transition cursor-pointer">
+
+            <span>💳</span>
+
+            <span>Payments</span>
+
+        </a>
+
+        <a class="flex items-center gap-4 px-4 py-3 rounded-xl hover:bg-slate-800 transition cursor-pointer">
+
+            <span>📊</span>
+
+            <span>Reports</span>
+
+        </a>
+
+        <div>
+
+            <button
+                    (click)="toggleSettings()"
+                    class="w-full flex items-center justify-between gap-4 px-4 py-3 rounded-xl hover:bg-slate-800 transition cursor-pointer">
+
+                <div class="flex items-center gap-4">
+
+                    <span>⚙️</span>
+
+                    <span>Settings</span>
+
+                </div>
+
+
+                <span
+                        class="transition-transform duration-300"
+                        [ngClass]="isSettingsOpen ? 'rotate-180' : ''">
+
+            ▼
+
+        </span>
+
+            </button>
+
+
+
+            <div
+                    *ngIf="isSettingsOpen"
+                    class="ml-6 mt-2 space-y-1">
+
+                <a  (click)="navigateToUserManagement()"
+                        class="flex items-center gap-3 px-4 py-2 rounded-lg
+                   hover:bg-slate-800 transition cursor-pointer">
+
+                    <span>👥</span>
+
+                    <span class="text-sm">
+                User Management
+            </span>
+
+                </a>
+
+
+                <a  (click)="navigateToPermissions()"
+                    class="flex items-center gap-3 px-4 py-2 rounded-lg
+                   hover:bg-slate-800 transition cursor-pointer">
+
+                    <span>🔐</span>
+
+                    <span class="text-sm">
+               Roll & Permissions
+            </span>
+
+                </a>
+
+
+
+
+            </div>
+
+        </div>
+
+    </nav>
+
+
+<!--    <div class="absolute bottom-5 left-3 right-3">-->
+
+<!--        <button-->
+
+<!--                class="w-full bg-red-500 hover:bg-red-600 transition rounded-xl py-3 font-semibold">-->
+
+<!--            Logout-->
+
+<!--        </button>-->
+
+<!--    </div>-->
+
+</div>
+
+
+<!-- Overlay -->
+
+<div
+
+        *ngIf="isSidebarOpen"
+
+        class="fixed inset-0 bg-black/50 backdrop-blur-sm z-30"
+
+        (click)="toggleSidebar()">
+
+</div>

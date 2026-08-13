@@ -1,0 +1,230 @@
+<app-shared></app-shared>
+<br><br>
+
+<div class="min-h-screen bg-gray-100 p-8">
+    <div class="bg-white rounded-2xl shadow-lg p-6 mb-6">
+        <div class="flex flex-col md:flex-row justify-between items-center">
+            <div>
+                <p class="text-gray-500 text-sm font-medium">
+                    Settings / Roles & Permissions
+                </p>
+
+                <h1 class="text-4xl font-bold text-gray-800 mt-2">
+                    Roles & Permissions
+                </h1>
+
+                <p class="text-gray-500 mt-2">
+                    Manage all users, update information and monitor status.
+                </p>
+            </div>
+
+            <div class="mt-5 md:mt-0">
+
+                <button
+                        (click)="navigateToAddPage()"
+                        class="bg-blue-600 hover:bg-blue-700 transition text-white px-6 py-3 rounded-xl shadow-lg font-semibold cursor-pointer">
+
+                    + Add User
+
+                </button>
+
+            </div>
+        </div>
+
+    </div>
+
+    <div class="bg-white rounded-xl shadow p-5 mb-6">
+
+        <div class="flex justify-between items-center flex-wrap gap-4">
+
+            <input
+                    type="text"
+                    placeholder="Search User..."
+                    class="border border-gray-300 rounded-lg px-4 py-3 w-full md:w-80 focus:ring-2 focus:ring-blue-400 outline-none">
+
+            <div class="text-gray-500 font-semibold">
+
+                Showing
+
+                {{(currentPage-1)*pageSize+1}}
+
+                -
+
+                {{((currentPage-1)*pageSize)+paginatedUsers.length}}
+
+                of
+
+                {{users.length}}
+
+                Users
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
+
+        <div class="overflow-x-auto">
+
+            <table class="min-w-full">
+
+                <thead class="bg-blue-600 text-white">
+
+                <tr>
+
+                    <th class="py-4 px-4 text-center">S.No</th>
+                    <th class="py-4 px-4 text-center">UserName</th>
+                    <th class="py-4 px-4 text-center">Role</th>
+                    <th class="py-4 px-4 text-center">Status</th>
+                    <th class="py-4 px-4 text-center">Actions</th>
+
+
+
+                </tr>
+
+                </thead>
+
+                <tbody>
+
+                <tr
+                        *ngFor="let user of paginatedUsers;let i=index"
+                        class="border-b hover:bg-blue-50 transition">
+
+                    <td class="text-center py-4">
+
+                        {{(currentPage-1)*pageSize+i+1}}
+
+                    </td>
+
+                    <td class="text-center py-4 font-medium">
+
+                        {{user.userName}}
+
+                    </td>
+
+                    <td class="text-center py-4">
+
+                        {{user.role}}
+
+                    </td>
+
+                    <td class="text-center py-4">
+
+                        {{user.status}}
+
+                    </td>
+
+
+                    <td class="text-center py-4">
+
+                        <button
+                                (click)="editStatus(user)"
+                                type="button"
+                                class="inline-flex items-center gap-2
+           bg-blue-600 text-white
+           px-5 py-2.5
+           rounded-lg
+           text-sm font-semibold
+           shadow-sm
+           hover:bg-blue-700
+           hover:shadow-md
+           active:scale-95
+           transition-all duration-200
+           cursor-pointer">
+
+                            <!-- Edit Icon -->
+                            <svg
+                                    class="w-4 h-4"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    viewBox="0 0 24 24">
+
+                                <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M16.862 3.487a2.25 2.25 0 0 1 3.182 3.182L8.25 18.463
+               3.75 19.5l1.037-4.5L16.862 3.487Z" />
+
+                            </svg>
+
+                            Edit
+
+                        </button>
+
+                    </td>
+
+
+
+                </tr>
+
+                <tr *ngIf="users.length==0">
+
+                    <td
+                            colspan="7"
+                            class="text-center py-10 text-gray-500">
+
+                        No Users Found
+
+                    </td>
+
+                </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+    <div class="flex justify-between items-center mt-6 flex-wrap gap-4">
+
+        <div class="text-gray-500">
+
+            Total Records :
+
+            <b>{{users.length}}</b>
+
+        </div>
+
+        <div class="flex gap-3">
+
+            <button
+
+                    (click)="previousPage()"
+
+                    [disabled]="currentPage==1"
+
+                    class="bg-gray-300 hover:bg-gray-400 disabled:opacity-50 px-5 py-2 rounded-lg">
+
+                Previous
+
+            </button>
+
+            <div
+                    class="bg-blue-600 text-white px-5 py-2 rounded-lg">
+
+                {{currentPage}}
+
+            </div>
+
+            <button
+
+                    (click)="nextPage()"
+
+                    [disabled]="currentPage==totalPages"
+
+                    class="bg-blue-600 hover:bg-blue-700 disabled:opacity-50 text-white px-5 py-2 rounded-lg">
+
+                Next
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
