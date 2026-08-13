@@ -1,4 +1,4 @@
-import {CanDeactivate, CanDeactivateFn} from "@angular/router";
+import {CanDeactivateFn} from "@angular/router";
 
 export interface CanComponentDeactivate {
 

@@ -4,6 +4,8 @@ import {MasterService} from "../master-service";
 import {FormBuilder, ReactiveFormsModule, Validators} from "@angular/forms";
 import {NgIf} from "@angular/common";
 import {CanComponentDeactivate} from "../../reuseable/guard/guard";
+import Swal from 'sweetalert2';
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-branch-managment',
@@ -19,8 +21,10 @@ import {CanComponentDeactivate} from "../../reuseable/guard/guard";
 export class BranchManagment implements OnInit,CanComponentDeactivate {
 
   branch:any;
+  updatepage:Boolean=false;
+  id:any;
 
-  constructor(private master:MasterService,private fb:FormBuilder) {
+  constructor(private ms:MasterService,private fb:FormBuilder,private route:Router,private activated:ActivatedRoute) {
   }
 
   ngOnInit() {
@@ -34,7 +38,9 @@ export class BranchManagment implements OnInit,CanComponentDeactivate {
       contactNumber:['',Validators.required],
       emailAddress:['',Validators.required],
       status:['',Validators.required],
-    })
+    });
+    this.id = this.activated.snapshot.paramMap.get('id')
+    this.updatepage = true;
   }
 
   canDeactivate(): boolean {
@@ -56,5 +62,65 @@ export class BranchManagment implements OnInit,CanComponentDeactivate {
     event.returnValue = '';
   }
 }
+  saveBranch() {
+
+    if (this.branch.invalid) {
+
+      this.branch.markAllAsTouched();
+
+      Swal.fire({
+        icon: 'warning',
+        title: 'Required Fields',
+        text: 'Please fill all required fields.',
+        confirmButtonText: 'OK'
+      });
+
+      return;
+    }
+
+    const formValue = this.branch.getRawValue();
+
+    this.ms.saveBranch(formValue).subscribe({
+
+      next: (res: any) => {
+
+        Swal.fire({
+          icon: 'success',
+          title: 'Success!',
+          text: 'Branch saved successfully.',
+          confirmButtonText: 'OK'
+        }).then(() => {
+
+
+          this.branch.markAsPristine();
+
+
+
+        });
+
+      },
+
+      error: (err: any) => {
+
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops!',
+          text: err?.error?.message || 'Something went wrong while saving the branch.',
+          confirmButtonText: 'OK'
+        });
+
+      }
+
+    });
+
+  }
+
+  navigateToManagePage(){
+    this.route.navigateByUrl('/master/branch/manage')
+  }
+
+  updateBranch(){
+
+  }
 
 }

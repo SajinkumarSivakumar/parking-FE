@@ -8,6 +8,7 @@ import {Permissions} from "./settings/permissions/permissions";
 import {PermissionsManage} from "./settings/permissions/permissions-manage/permissions-manage";
 import {BranchManagment} from "./masters/branch-managment/branch-managment";
 import {Guard} from "./reuseable/guard/guard";
+import {BranchManage} from "./masters/branch-managment/branch-manage/branch-manage";
 
 export const routes: Routes = [
 
@@ -52,5 +53,15 @@ export const routes: Routes = [
         path: 'master/branchManagement',
         component:BranchManagment,
         canDeactivate:[Guard]
+    },
+    {
+        path: 'master/branchManagement/:id',
+        component:BranchManagment,
+        canDeactivate:[Guard]
+    },
+    {
+        path: 'master/branch/manage',
+        component:BranchManage,
+
     },
 ];
