@@ -6,6 +6,8 @@ import {Usermanagement} from "./settings/usermanagement/usermanagement";
 import {UsermanagementManage} from "./settings/usermanagement/usermanagement-manage/usermanagement-manage";
 import {Permissions} from "./settings/permissions/permissions";
 import {PermissionsManage} from "./settings/permissions/permissions-manage/permissions-manage";
+import {BranchManagment} from "./masters/branch-managment/branch-managment";
+import {Guard} from "./reuseable/guard/guard";
 
 export const routes: Routes = [
 
@@ -44,5 +46,11 @@ export const routes: Routes = [
     {
         path: 'settings/permissions/:id',
         component:Permissions
+    },
+
+    {
+        path: 'master/branchManagement',
+        component:BranchManagment,
+        canDeactivate:[Guard]
     },
 ];

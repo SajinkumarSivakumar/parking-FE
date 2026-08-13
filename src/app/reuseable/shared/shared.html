@@ -83,6 +83,61 @@
 
         </a>
 
+
+
+
+        <div>
+
+            <button
+                    (click)="toggleMasters()"
+                    class="w-full flex items-center justify-between gap-4 px-4 py-3 rounded-xl hover:bg-slate-800 transition cursor-pointer">
+
+                <div class="flex items-center gap-4">
+
+                    <span>⚙️</span>
+
+                    <span>Master</span>
+
+                </div>
+
+
+                <span
+                        class="transition-transform duration-300"
+                        [ngClass]="isMastersOpen ? 'rotate-180' : ''">
+
+            ▼
+
+        </span>
+
+            </button>
+
+
+
+            <div
+                    *ngIf="isMastersOpen"
+                    class="ml-6 mt-2 space-y-1">
+
+                <a  (click)="navigateToBranchManagement()"
+                    class="flex items-center gap-3 px-4 py-2 rounded-lg
+                   hover:bg-slate-800 transition cursor-pointer">
+
+                    <span>👥</span>
+
+                    <span class="text-sm">
+                  Branch Management
+            </span>
+
+                </a>
+
+            </div>
+
+        </div>
+
+
+
+
+
+
         <a class="flex items-center gap-4 px-4 py-3 rounded-xl hover:bg-slate-800 transition cursor-pointer">
 
             <span>🚗</span>

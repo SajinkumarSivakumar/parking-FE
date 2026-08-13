@@ -1,0 +1,606 @@
+<app-shared></app-shared>
+<br><br><br>
+
+
+<div class="min-h-screen bg-slate-100">
+
+    <!-- ==================== PAGE HEADER ==================== -->
+    <div class="bg-white border-b border-slate-200 shadow-sm">
+
+        <div class="px-6 lg:px-10 py-4">
+
+            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+
+                <!-- Left -->
+                <div>
+                    <p class="text-sm font-medium text-slate-500">
+                        Master / Branch Management
+                    </p>
+
+                    <h1 class="text-2xl lg:text-3xl font-bold text-slate-800 mt-1">
+                        Add New Branch
+                    </h1>
+                </div>
+
+                <!-- Right Actions -->
+                <div class="flex items-center gap-3">
+
+                    <button
+                            type="button"
+                            class="inline-flex items-center gap-2
+                   px-5 py-2.5
+                   rounded-lg
+                   bg-blue-600
+                   hover:bg-blue-700
+                   text-white
+                   text-sm font-semibold
+                   shadow-sm
+                   hover:shadow-md
+                   transition-all duration-200
+                   cursor-pointer">
+
+                        <!-- List Icon -->
+                        <svg
+                                class="w-4 h-4"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24">
+
+                            <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M4 6h16M4 12h16M4 18h16" />
+
+                        </svg>
+
+                        Go To Manage
+
+                    </button>
+
+
+                    <button
+                            type="button"
+                            class="inline-flex items-center gap-2
+                   px-6 py-2.5
+                   rounded-lg
+                   bg-gradient-to-r from-emerald-500 to-teal-600
+                   hover:from-emerald-600 hover:to-teal-700
+                   text-white
+                   text-sm font-semibold
+                   shadow-sm
+                   hover:shadow-md
+                   transition-all duration-200
+                   cursor-pointer">
+
+                        <!-- Save Icon -->
+                        <svg
+                                class="w-4 h-4"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24">
+
+                            <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M5 13l4 4L19 7" />
+
+                        </svg>
+
+                        Save Branch
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ==================== MAIN CONTENT ==================== -->
+    <main class="px-4 sm:px-6 lg:px-10 py-6">
+
+        <div class="w-full bg-white
+                rounded-2xl
+                border border-slate-200
+                shadow-sm
+                overflow-hidden">
+
+
+            <!-- ==================== CARD HEADER ==================== -->
+            <div class="px-6 lg:px-8 py-6
+                  border-b border-slate-200
+                  bg-gradient-to-r from-white to-slate-50">
+
+                <div class="flex items-center gap-4">
+
+                    <!-- Icon -->
+                    <div class="w-12 h-12
+                      rounded-xl
+                      bg-blue-50
+                      border border-blue-100
+                      flex items-center justify-center
+                      flex-shrink-0">
+
+                        <svg
+                                class="w-6 h-6 text-blue-600"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24">
+
+                            <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-6 4h1m4 0h1" />
+
+                        </svg>
+
+                    </div>
+
+
+                    <div>
+
+                        <h2 class="text-xl font-bold text-slate-800">
+                            Branch Information
+                        </h2>
+
+                        <p class="text-sm text-slate-500 mt-1">
+                            Enter the basic information required to create a branch.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- ==================== FORM BODY ==================== -->
+            <form [formGroup]="branch" class="p-6 lg:p-8">
+
+
+                <!-- ==================== BASIC INFORMATION ==================== -->
+
+                <div class="mb-8">
+
+                    <div class="flex items-center gap-2 mb-5">
+
+                        <div class="w-1 h-5 rounded-full bg-blue-600"></div>
+
+                        <h3 class="text-lg font-bold text-slate-800">
+                            Basic Information
+                        </h3>
+
+                    </div>
+
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+
+                        <!-- Branch Name -->
+                        <div>
+
+                            <label
+                                    class="block text-sm font-semibold text-slate-700 mb-2">
+
+                                Branch Name
+
+                                <span class="text-red-500">*</span>
+
+                            </label>
+
+                            <input formControlName="branchName"
+                                    type="text"
+                                    placeholder="Enter branch name"
+                                    class="w-full h-12
+                       px-4
+                       rounded-lg
+                       border border-slate-300
+                       bg-white
+                       text-base
+                       text-slate-800
+                       placeholder:text-slate-400
+                       outline-none
+                       focus:border-blue-500
+                       focus:ring-2
+                       focus:ring-blue-100
+                       transition-all duration-200" />
+
+
+
+                            <p *ngIf="branch.get('branchName')?.hasError('required') && branch.get('branchName')?.touched"
+                                    class="text-red-500 text-sm mt-1">
+                                Branch Name is Required
+                            </p>
+
+                        </div>
+
+
+                        <!-- Branch Code -->
+                        <div>
+
+                            <label
+                                    class="block text-sm font-semibold text-slate-700 mb-2">
+
+                                Branch Code
+
+                                <span class="text-red-500">*</span>
+
+                            </label>
+
+                            <input formControlName="branchCode"
+                                    type="text"
+                                    placeholder="Example: BLR001"
+                                    class="w-full h-12
+                       px-4
+                       rounded-lg
+                       border border-slate-300
+                       bg-white
+                       text-base
+                       text-slate-800
+                       placeholder:text-slate-400
+                       uppercase
+                       outline-none
+                       focus:border-blue-500
+                       focus:ring-2
+                       focus:ring-blue-100
+                       transition-all duration-200" />
+
+                            <p *ngIf="branch.get('branchCode')?.hasError('required') && branch.get('branchCode')?.touched"
+                               class="text-red-500 text-sm mt-1">
+                                Branch Code is Required
+                            </p>
+
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ==================== LOCATION INFORMATION ==================== -->
+
+                <div class="mb-8">
+
+                    <div class="flex items-center gap-2 mb-5">
+
+                        <div class="w-1 h-5 rounded-full bg-emerald-500"></div>
+
+                        <h3 class="text-lg font-bold text-slate-800">
+                            Location Information
+                        </h3>
+
+                    </div>
+
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+
+
+                        <!-- Address -->
+                        <div class="md:col-span-2 lg:col-span-4">
+
+                            <label
+                                    class="block text-sm font-semibold text-slate-700 mb-2">
+
+                                Address
+
+                                <span class="text-red-500">*</span>
+
+                            </label>
+
+                            <textarea formControlName="address"
+                                    rows="3"
+                                    placeholder="Enter complete branch address"
+                                    class="w-full
+                       px-4 py-3
+                       rounded-lg
+                       border border-slate-300
+                       bg-white
+                       text-base
+                       text-slate-800
+                       placeholder:text-slate-400
+                       resize-none
+                       outline-none
+                       focus:border-blue-500
+                       focus:ring-2
+                       focus:ring-blue-100
+                       transition-all duration-200"></textarea>
+
+                            <p *ngIf="branch.get('address')?.hasError('required') && branch.get('address')?.touched"
+                               class="text-red-500 text-sm mt-1">
+                                Address is Required
+                            </p>
+
+                        </div>
+
+
+                        <!-- City -->
+                        <div>
+
+                            <label
+                                    class="block text-sm font-semibold text-slate-700 mb-2">
+
+                                City
+
+                                <span class="text-red-500">*</span>
+
+                            </label>
+
+                            <input formControlName="city"
+                                    type="text"
+                                    placeholder="Enter city"
+                                    class="w-full h-12
+                       px-4
+                       rounded-lg
+                       border border-slate-300
+                       bg-white
+                       text-base
+                       text-slate-800
+                       placeholder:text-slate-400
+                       outline-none
+                       focus:border-blue-500
+                       focus:ring-2
+                       focus:ring-blue-100
+                       transition-all duration-200" />
+
+
+                            <p *ngIf="branch.get('city')?.hasError('required') && branch.get('city')?.touched"
+                               class="text-red-500 text-sm mt-1">
+                                City is Required
+                            </p>
+
+                        </div>
+
+
+                        <!-- State -->
+                        <div>
+
+                            <label
+                                    class="block text-sm font-semibold text-slate-700 mb-2">
+
+                                State
+
+                                <span class="text-red-500">*</span>
+
+                            </label>
+
+                            <select formControlName="state"
+                                    class="w-full h-12
+                       px-4
+                       rounded-lg
+                       border border-slate-300
+                       bg-white
+                       text-base
+                       text-slate-800
+                       outline-none
+                       focus:border-blue-500
+                       focus:ring-2
+                       focus:ring-blue-100
+                       transition-all duration-200">
+
+                                <option value="">
+                                    Select State
+                                </option>
+
+                                <option>Karnataka</option>
+                                <option>Tamil Nadu</option>
+                                <option>Kerala</option>
+                                <option>Andhra Pradesh</option>
+                                <option>Telangana</option>
+                                <option>Maharashtra</option>
+
+                            </select>
+
+
+                            <p *ngIf="branch.get('state')?.hasError('required') && branch.get('state')?.touched"
+                               class="text-red-500 text-sm mt-1">
+                                State is Required
+                            </p>
+
+                        </div>
+
+
+                        <!-- Pincode -->
+                        <div>
+
+                            <label
+                                    class="block text-sm font-semibold text-slate-700 mb-2">
+
+                                Pincode
+
+                                <span class="text-red-500">*</span>
+
+                            </label>
+
+                            <input formControlName="pincode"
+                                    type="text"
+                                    maxlength="6"
+                                    placeholder="Enter pincode"
+                                    class="w-full h-12
+                       px-4
+                       rounded-lg
+                       border border-slate-300
+                       bg-white
+                       text-base
+                       text-slate-800
+                       placeholder:text-slate-400
+                       outline-none
+                       focus:border-blue-500
+                       focus:ring-2
+                       focus:ring-blue-100
+                       transition-all duration-200" />
+
+
+                            <p *ngIf="branch.get('pincode')?.hasError('required') && branch.get('pincode')?.touched"
+                               class="text-red-500 text-sm mt-1">
+                                Pincode is Required
+                            </p>
+
+                        </div>
+
+
+                        <!-- Contact Number -->
+                        <div>
+
+                            <label
+                                    class="block text-sm font-semibold text-slate-700 mb-2">
+
+                                Contact Number
+
+                                <span class="text-red-500">*</span>
+
+                            </label>
+
+                            <input formControlName="contactNumber"
+                                    type="tel"
+                                    placeholder="Enter contact number"
+                                    class="w-full h-12
+                       px-4
+                       rounded-lg
+                       border border-slate-300
+                       bg-white
+                       text-base
+                       text-slate-800
+                       placeholder:text-slate-400
+                       outline-none
+                       focus:border-blue-500
+                       focus:ring-2
+                       focus:ring-blue-100
+                       transition-all duration-200" />
+
+
+                            <p *ngIf="branch.get('contactNumber')?.hasError('required') && branch.get('contactNumber')?.touched"
+                               class="text-red-500 text-sm mt-1">
+                                contactNumber is Required
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ==================== CONTACT & STATUS ==================== -->
+
+                <div class="mb-8">
+
+                    <div class="flex items-center gap-2 mb-5">
+
+                        <div class="w-1 h-5 rounded-full bg-purple-500"></div>
+
+                        <h3 class="text-lg font-bold text-slate-800">
+                            Contact & Status
+                        </h3>
+
+                    </div>
+
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+
+                        <!-- Email -->
+                        <div>
+
+                            <label
+                                    class="block text-sm font-semibold text-slate-700 mb-2">
+
+                                Email Address
+
+                            </label>
+
+                            <input formControlName="emailAddress"
+                                    type="email"
+                                    placeholder="branch@example.com"
+                                    class="w-full h-12
+                       px-4
+                       rounded-lg
+                       border border-slate-300
+                       bg-white
+                       text-base
+                       text-slate-800
+                       placeholder:text-slate-400
+                       outline-none
+                       focus:border-blue-500
+                       focus:ring-2
+                       focus:ring-blue-100
+                       transition-all duration-200" />
+
+                        </div>
+
+
+                        <!-- Status -->
+                        <div>
+
+                            <label
+                                    class="block text-sm font-semibold text-slate-700 mb-2">
+
+                                Status
+
+                                <span class="text-red-500">*</span>
+
+                            </label>
+
+                            <select formControlName="status"
+                                    class="w-full h-12
+                       px-4
+                       rounded-lg
+                       border border-slate-300
+                       bg-white
+                       text-base
+                       text-slate-800
+                       outline-none
+                       focus:border-blue-500
+                       focus:ring-2
+                       focus:ring-blue-100
+                       transition-all duration-200">
+
+                                <option value="ACTIVE">
+                                    Active
+                                </option>
+
+                                <option value="INACTIVE">
+                                    Inactive
+                                </option>
+
+                            </select>
+
+                            <p *ngIf="branch.get('contactNumber')?.hasError('required') && branch.get('contactNumber')?.touched"
+                               class="text-red-500 text-sm mt-1">
+                                contactNumber is Required
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ==================== FOOTER ACTIONS ==================== -->
+
+                <div class="border-t border-slate-200 pt-6">
+
+                    <div
+                            class="flex flex-col sm:flex-row
+                   sm:items-center
+                   sm:justify-between
+                   gap-4">
+
+                    </div>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </main>
+
+</div>

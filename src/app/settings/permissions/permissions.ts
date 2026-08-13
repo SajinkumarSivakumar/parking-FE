@@ -57,50 +57,58 @@ export class Permissions implements OnInit {
         view: false,
 
       },
+
       {
         menuId: 2,
+        menuName: 'Master',
+        icon: '🏠',
+        view: false,
+
+      },
+      {
+        menuId: 3,
         menuName: 'Vehicle Entry',
         icon: '🚗',
         view: false,
 
       },
       {
-        menuId: 3,
+        menuId: 4,
         menuName: 'Vehicle Exit',
         icon: '🚙',
         view: false,
 
       },
       {
-        menuId: 4,
+        menuId: 5,
         menuName: 'Parking Slots',
         icon: '🅿️',
         view: false,
 
       },
       {
-        menuId: 5,
+        menuId: 6,
         menuName: 'Customers',
         icon: '👤',
         view: false,
 
       },
       {
-        menuId: 6,
+        menuId: 7,
         menuName: 'Payments',
         icon: '💳',
         view: false,
 
       },
       {
-        menuId: 7,
+        menuId: 8,
         menuName: 'Reports',
         icon: '📊',
         view: false,
 
       },
       {
-        menuId: 8,
+        menuId: 9,
         menuName: 'Settings',
         icon: '⚙️',
         view: false,

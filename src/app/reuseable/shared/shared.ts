@@ -17,6 +17,7 @@ export class Shared implements OnInit{
   userEmail: string | null = '';
 
   isSettingsOpen = false;
+  isMastersOpen = false;
 
   constructor(private route: Router,private cd:ChangeDetectorRef) {
   }
@@ -54,5 +55,16 @@ export class Shared implements OnInit{
   }
   navigateToPermissions(){
     this.route.navigateByUrl('/settings/permissions/manage')
+  }
+
+
+//   master
+
+  toggleMasters(){
+    this.isMastersOpen = !this.isMastersOpen;
+  }
+
+  navigateToBranchManagement(){
+    this.route.navigateByUrl('/master/branchManagement')
   }
 }
