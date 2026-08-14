@@ -18,4 +18,16 @@ export class MasterService {
   getAllBranchDetails(){
     return this.http.get(env.apiUrl +'master/getAllBranchDetails');
   }
+  getBranchparticularInfo(id:any){
+    return this.http.get(env.apiUrl +'master/getBranchparticularInfo',{
+      params:{id:id}
+    });
+  }
+
+  updateBranch(id: string, data: any) {
+    return this.http.put(
+        `${env.apiUrl}/master/branch/${id}`,
+        data
+    );
+  }
 }

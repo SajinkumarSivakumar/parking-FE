@@ -9,6 +9,7 @@ import {PermissionsManage} from "./settings/permissions/permissions-manage/permi
 import {BranchManagment} from "./masters/branch-managment/branch-managment";
 import {Guard} from "./reuseable/guard/guard";
 import {BranchManage} from "./masters/branch-managment/branch-manage/branch-manage";
+import {ParkingConfigurations} from "./masters/parking-configurations/parking-configurations/parking-configurations";
 
 export const routes: Routes = [
 
@@ -62,6 +63,12 @@ export const routes: Routes = [
     {
         path: 'master/branch/manage',
         component:BranchManage,
+
+    },
+
+    {
+        path: 'master/parkingConfiguration',
+        component:ParkingConfigurations,
 
     },
 ];

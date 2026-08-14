@@ -67,4 +67,7 @@ export class Shared implements OnInit{
   navigateToBranchManagement(){
     this.route.navigateByUrl('/master/branch/manage')
   }
+  navigateToParkingConfigurations(){
+    this.route.navigateByUrl('/master/parkingConfiguration')
+  }
 }

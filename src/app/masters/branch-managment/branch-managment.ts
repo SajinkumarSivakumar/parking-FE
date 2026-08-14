@@ -30,7 +30,6 @@ export class BranchManagment implements OnInit,CanComponentDeactivate {
   ngOnInit() {
     this.branch = this.fb.group({
       branchName:['',Validators.required],
-      branchCode:['',Validators.required],
       address:['',Validators.required],
       city:['',Validators.required],
       state:['',Validators.required],
@@ -40,7 +39,14 @@ export class BranchManagment implements OnInit,CanComponentDeactivate {
       status:['',Validators.required],
     });
     this.id = this.activated.snapshot.paramMap.get('id')
-    this.updatepage = true;
+     if(this.id){
+       this.updatepage = true;
+       this.ms.getBranchparticularInfo(this.id).subscribe((res:any)=>{
+         this.patchValue(res.branchDetails)
+
+       })
+     }
+
   }
 
   canDeactivate(): boolean {
@@ -119,8 +125,61 @@ export class BranchManagment implements OnInit,CanComponentDeactivate {
     this.route.navigateByUrl('/master/branch/manage')
   }
 
-  updateBranch(){
+  updateBranch() {
 
+    if (this.branch.invalid) {
+
+      this.branch.markAllAsTouched();
+
+      Swal.fire({
+        icon: 'warning',
+        title: 'Required Fields',
+        text: 'Please fill all required fields.',
+        confirmButtonText: 'OK'
+      });
+
+      return;
+    }
+
+    const formValue = this.branch.getRawValue();
+
+    this.ms.updateBranch(this.id, formValue).subscribe({
+
+      next: (res: any) => {
+
+        Swal.fire({
+          icon: 'success',
+          title: 'Success!',
+          text: 'Branch updated successfully.',
+          confirmButtonText: 'OK'
+        }).then(() => {
+
+
+          this.branch.markAsPristine();
+
+          this.route.navigateByUrl('/master/branch/manage');
+
+        });
+
+      },
+
+      error: (err: any) => {
+
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops!',
+          text: err?.error?.message ||
+              'Something went wrong while updating the branch.',
+          confirmButtonText: 'OK'
+        });
+
+      }
+
+    });
+  }
+
+  patchValue(data:any){
+    this.branch.patchValue(data.branchInfo)
   }
 
 }
