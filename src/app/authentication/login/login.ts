@@ -47,7 +47,7 @@ export class Login  implements OnInit {
           timer: 5000,
           timerProgressBar: true
         });
-        this.route.navigateByUrl('settings/userManagement/manage')
+        this.route.navigateByUrl('system/dashboard')
       },
       error: (err) => {
 
@@ -66,7 +66,5 @@ export class Login  implements OnInit {
     });
   }
 
-  newRegister(){
-    this.route.navigateByUrl('new/register')
-  }
+
 }

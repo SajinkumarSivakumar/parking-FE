@@ -70,4 +70,8 @@ export class Shared implements OnInit{
   navigateToParkingConfigurations(){
     this.route.navigateByUrl('/master/parkingConfiguration')
   }
+
+  navigateToDashboard(){
+    this.route.navigateByUrl('/system/dashboard')
+  }
 }

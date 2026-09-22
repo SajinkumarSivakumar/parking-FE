@@ -1,0 +1,592 @@
+<app-shared></app-shared>
+
+<br><br><br>
+
+<div class="min-h-screen bg-slate-100 p-6">
+
+    <!-- Header -->
+    <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-6">
+        <div>
+            <h1 class="text-2xl font-bold text-slate-800">
+                Parking Dashboard
+            </h1>
+            <p class="text-sm text-slate-500 mt-1">
+                Overview of your parking management system
+            </p>
+        </div>
+
+        <div class="flex items-center gap-3 mt-4 md:mt-0">
+
+            <select
+                    class="bg-white border border-slate-200 rounded-lg px-4 py-2
+               text-sm text-slate-700 outline-none focus:ring-2 focus:ring-blue-500">
+                <option>Main Branch</option>
+                <option>Indiranagar Branch</option>
+                <option>Whitefield Branch</option>
+            </select>
+
+            <button
+                    class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2
+               rounded-lg text-sm font-medium transition">
+                + Vehicle Entry
+            </button>
+
+        </div>
+    </div>
+
+
+    <!-- Stats Cards -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-6">
+
+        <!-- Total Vehicles -->
+        <div class="bg-white rounded-2xl p-5 shadow-sm border border-slate-200">
+            <div class="flex items-center justify-between">
+
+                <div>
+                    <p class="text-sm text-slate-500">
+                        Total Vehicles
+                    </p>
+
+                    <h2 class="text-3xl font-bold text-slate-800 mt-2">
+                        248
+                    </h2>
+
+                    <p class="text-xs text-green-600 mt-2">
+                        ↑ 12% from yesterday
+                    </p>
+                </div>
+
+                <div class="w-12 h-12 rounded-xl bg-blue-100
+                    flex items-center justify-center text-2xl">
+                    🚗
+                </div>
+
+            </div>
+        </div>
+
+
+        <!-- Available Slots -->
+        <div class="bg-white rounded-2xl p-5 shadow-sm border border-slate-200">
+            <div class="flex items-center justify-between">
+
+                <div>
+                    <p class="text-sm text-slate-500">
+                        Available Slots
+                    </p>
+
+                    <h2 class="text-3xl font-bold text-slate-800 mt-2">
+                        72
+                    </h2>
+
+                    <p class="text-xs text-green-600 mt-2">
+                        28% slots available
+                    </p>
+                </div>
+
+                <div class="w-12 h-12 rounded-xl bg-green-100
+                    flex items-center justify-center text-2xl">
+                    🅿️
+                </div>
+
+            </div>
+        </div>
+
+
+        <!-- Occupied Slots -->
+        <div class="bg-white rounded-2xl p-5 shadow-sm border border-slate-200">
+            <div class="flex items-center justify-between">
+
+                <div>
+                    <p class="text-sm text-slate-500">
+                        Occupied Slots
+                    </p>
+
+                    <h2 class="text-3xl font-bold text-slate-800 mt-2">
+                        178
+                    </h2>
+
+                    <p class="text-xs text-orange-600 mt-2">
+                        72% occupancy
+                    </p>
+                </div>
+
+                <div class="w-12 h-12 rounded-xl bg-orange-100
+                    flex items-center justify-center text-2xl">
+                    🚘
+                </div>
+
+            </div>
+        </div>
+
+
+        <!-- Revenue -->
+        <div class="bg-white rounded-2xl p-5 shadow-sm border border-slate-200">
+            <div class="flex items-center justify-between">
+
+                <div>
+                    <p class="text-sm text-slate-500">
+                        Today's Revenue
+                    </p>
+
+                    <h2 class="text-3xl font-bold text-slate-800 mt-2">
+                        ₹24,850
+                    </h2>
+
+                    <p class="text-xs text-green-600 mt-2">
+                        ↑ 8.5% from yesterday
+                    </p>
+                </div>
+
+                <div class="w-12 h-12 rounded-xl bg-purple-100
+                    flex items-center justify-center text-2xl">
+                    💰
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+
+    <!-- Main Grid -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
+
+        <!-- Parking Overview -->
+        <div class="lg:col-span-2 bg-white rounded-2xl shadow-sm
+                border border-slate-200 p-6">
+
+            <div class="flex items-center justify-between mb-6">
+
+                <div>
+                    <h2 class="text-lg font-semibold text-slate-800">
+                        Parking Overview
+                    </h2>
+
+                    <p class="text-sm text-slate-500">
+                        Current parking capacity
+                    </p>
+                </div>
+
+                <select
+                        class="border border-slate-200 rounded-lg px-3 py-2
+                 text-sm outline-none">
+                    <option>Today</option>
+                    <option>This Week</option>
+                    <option>This Month</option>
+                </select>
+
+            </div>
+
+
+            <!-- Progress -->
+            <div class="mb-6">
+
+                <div class="flex justify-between mb-2">
+          <span class="text-sm font-medium text-slate-600">
+            Parking Occupancy
+          </span>
+
+                    <span class="text-sm font-semibold text-slate-800">
+            72%
+          </span>
+                </div>
+
+                <div class="w-full h-4 bg-slate-100 rounded-full overflow-hidden">
+
+                    <div
+                            class="h-full bg-blue-600 rounded-full"
+                            style="width:72%">
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- Statistics -->
+            <div class="grid grid-cols-3 gap-4">
+
+                <div class="bg-slate-50 rounded-xl p-4 text-center">
+                    <p class="text-xs text-slate-500">
+                        Total Capacity
+                    </p>
+
+                    <p class="text-2xl font-bold text-slate-800 mt-1">
+                        250
+                    </p>
+                </div>
+
+                <div class="bg-green-50 rounded-xl p-4 text-center">
+                    <p class="text-xs text-green-600">
+                        Available
+                    </p>
+
+                    <p class="text-2xl font-bold text-green-700 mt-1">
+                        72
+                    </p>
+                </div>
+
+                <div class="bg-orange-50 rounded-xl p-4 text-center">
+                    <p class="text-xs text-orange-600">
+                        Occupied
+                    </p>
+
+                    <p class="text-2xl font-bold text-orange-700 mt-1">
+                        178
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Quick Actions -->
+        <div class="bg-white rounded-2xl shadow-sm
+                border border-slate-200 p-6">
+
+            <h2 class="text-lg font-semibold text-slate-800">
+                Quick Actions
+            </h2>
+
+            <p class="text-sm text-slate-500 mb-5">
+                Frequently used actions
+            </p>
+
+
+            <div class="space-y-3">
+
+                <button
+                        class="w-full flex items-center gap-4 p-4
+                 rounded-xl bg-blue-50 hover:bg-blue-100
+                 text-left transition">
+
+          <span class="w-10 h-10 rounded-lg bg-blue-600
+                       text-white flex items-center justify-center">
+            🚗
+          </span>
+
+                    <div>
+                        <p class="font-medium text-slate-800">
+                            Vehicle Entry
+                        </p>
+                        <p class="text-xs text-slate-500">
+                            Register new vehicle
+                        </p>
+                    </div>
+
+                </button>
+
+
+                <button
+                        class="w-full flex items-center gap-4 p-4
+                 rounded-xl bg-green-50 hover:bg-green-100
+                 text-left transition">
+
+          <span class="w-10 h-10 rounded-lg bg-green-600
+                       text-white flex items-center justify-center">
+            🚘
+          </span>
+
+                    <div>
+                        <p class="font-medium text-slate-800">
+                            Vehicle Exit
+                        </p>
+                        <p class="text-xs text-slate-500">
+                            Process vehicle exit
+                        </p>
+                    </div>
+
+                </button>
+
+
+                <button
+                        class="w-full flex items-center gap-4 p-4
+                 rounded-xl bg-purple-50 hover:bg-purple-100
+                 text-left transition">
+
+          <span class="w-10 h-10 rounded-lg bg-purple-600
+                       text-white flex items-center justify-center">
+            📊
+          </span>
+
+                    <div>
+                        <p class="font-medium text-slate-800">
+                            View Reports
+                        </p>
+                        <p class="text-xs text-slate-500">
+                            Check parking reports
+                        </p>
+                    </div>
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- Bottom Section -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+
+        <!-- Recent Vehicles -->
+        <div class="bg-white rounded-2xl shadow-sm
+                border border-slate-200 overflow-hidden">
+
+            <div class="p-6 flex items-center justify-between">
+
+                <div>
+                    <h2 class="text-lg font-semibold text-slate-800">
+                        Recent Vehicle Entries
+                    </h2>
+
+                    <p class="text-sm text-slate-500">
+                        Latest vehicles entering parking
+                    </p>
+                </div>
+
+                <button class="text-sm text-blue-600 font-medium">
+                    View All
+                </button>
+
+            </div>
+
+
+            <div class="overflow-x-auto">
+
+                <table class="w-full text-sm">
+
+                    <thead class="bg-slate-50 border-y border-slate-200">
+
+                    <tr>
+                        <th class="text-left px-6 py-3 text-slate-500 font-medium">
+                            Vehicle
+                        </th>
+
+                        <th class="text-left px-6 py-3 text-slate-500 font-medium">
+                            Slot
+                        </th>
+
+                        <th class="text-left px-6 py-3 text-slate-500 font-medium">
+                            Time
+                        </th>
+
+                        <th class="text-left px-6 py-3 text-slate-500 font-medium">
+                            Status
+                        </th>
+                    </tr>
+
+                    </thead>
+
+
+                    <tbody>
+
+                    <tr class="border-b border-slate-100">
+
+                        <td class="px-6 py-4 font-medium text-slate-800">
+                            KA 01 AB 1234
+                        </td>
+
+                        <td class="px-6 py-4">
+                            A-102
+                        </td>
+
+                        <td class="px-6 py-4 text-slate-500">
+                            10:25 AM
+                        </td>
+
+                        <td class="px-6 py-4">
+                <span
+                        class="px-3 py-1 rounded-full bg-green-100
+                         text-green-700 text-xs font-medium">
+                  Parked
+                </span>
+                        </td>
+
+                    </tr>
+
+
+                    <tr class="border-b border-slate-100">
+
+                        <td class="px-6 py-4 font-medium text-slate-800">
+                            TN 38 XY 4567
+                        </td>
+
+                        <td class="px-6 py-4">
+                            B-205
+                        </td>
+
+                        <td class="px-6 py-4 text-slate-500">
+                            10:12 AM
+                        </td>
+
+                        <td class="px-6 py-4">
+                <span
+                        class="px-3 py-1 rounded-full bg-green-100
+                         text-green-700 text-xs font-medium">
+                  Parked
+                </span>
+                        </td>
+
+                    </tr>
+
+
+                    <tr>
+
+                        <td class="px-6 py-4 font-medium text-slate-800">
+                            KA 05 MN 7890
+                        </td>
+
+                        <td class="px-6 py-4">
+                            A-108
+                        </td>
+
+                        <td class="px-6 py-4 text-slate-500">
+                            09:48 AM
+                        </td>
+
+                        <td class="px-6 py-4">
+                <span
+                        class="px-3 py-1 rounded-full bg-orange-100
+                         text-orange-700 text-xs font-medium">
+                  Exiting
+                </span>
+                        </td>
+
+                    </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+
+        <!-- Floor Status -->
+        <div class="bg-white rounded-2xl shadow-sm
+                border border-slate-200 p-6">
+
+            <div class="flex items-center justify-between mb-5">
+
+                <div>
+                    <h2 class="text-lg font-semibold text-slate-800">
+                        Floor Status
+                    </h2>
+
+                    <p class="text-sm text-slate-500">
+                        Parking availability by floor
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="space-y-4">
+
+                <!-- Floor 1 -->
+                <div class="border border-slate-200 rounded-xl p-4">
+
+                    <div class="flex justify-between mb-3">
+
+            <span class="font-medium text-slate-800">
+              Floor 1
+            </span>
+
+                        <span class="text-sm text-green-600 font-medium">
+              18 Available
+            </span>
+
+                    </div>
+
+                    <div class="w-full bg-slate-100 rounded-full h-2">
+
+                        <div
+                                class="bg-green-500 h-2 rounded-full"
+                                style="width:55%">
+                        </div>
+
+                    </div>
+
+                    <div class="flex justify-between mt-2 text-xs text-slate-500">
+                        <span>22 Occupied</span>
+                        <span>40 Total</span>
+                    </div>
+
+                </div>
+
+
+                <!-- Floor 2 -->
+                <div class="border border-slate-200 rounded-xl p-4">
+
+                    <div class="flex justify-between mb-3">
+
+            <span class="font-medium text-slate-800">
+              Floor 2
+            </span>
+
+                        <span class="text-sm text-orange-600 font-medium">
+              8 Available
+            </span>
+
+                    </div>
+
+                    <div class="w-full bg-slate-100 rounded-full h-2">
+
+                        <div
+                                class="bg-orange-500 h-2 rounded-full"
+                                style="width:80%">
+                        </div>
+
+                    </div>
+
+                    <div class="flex justify-between mt-2 text-xs text-slate-500">
+                        <span>32 Occupied</span>
+                        <span>40 Total</span>
+                    </div>
+
+                </div>
+
+
+                <!-- Floor 3 -->
+                <div class="border border-slate-200 rounded-xl p-4">
+
+                    <div class="flex justify-between mb-3">
+
+            <span class="font-medium text-slate-800">
+              Floor 3
+            </span>
+
+                        <span class="text-sm text-green-600 font-medium">
+              24 Available
+            </span>
+
+                    </div>
+
+                    <div class="w-full bg-slate-100 rounded-full h-2">
+
+                        <div
+                                class="bg-blue-500 h-2 rounded-full"
+                                style="width:40%">
+                        </div>
+
+                    </div>
+
+                    <div class="flex justify-between mt-2 text-xs text-slate-500">
+                        <span>16 Occupied</span>
+                        <span>40 Total</span>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+```

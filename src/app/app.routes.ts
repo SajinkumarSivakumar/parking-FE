@@ -10,6 +10,9 @@ import {BranchManagment} from "./masters/branch-managment/branch-managment";
 import {Guard} from "./reuseable/guard/guard";
 import {BranchManage} from "./masters/branch-managment/branch-manage/branch-manage";
 import {ParkingConfigurations} from "./masters/parking-configurations/parking-configurations/parking-configurations";
+import {Sample1} from "./masters/sample/sample1/sample1";
+import {Sample2} from "./masters/sample/sample2/sample2";
+import {DashboardSystem} from "./dashboard/dashboard-system/dashboard-system";
 
 export const routes: Routes = [
 
@@ -21,6 +24,11 @@ export const routes: Routes = [
     {
         path: 'new/register',
         component:Register
+    },
+
+    {
+        path: 'system/dashboard',
+        component:DashboardSystem
     },
     {
         path: 'settings/userManagement',
@@ -69,6 +77,20 @@ export const routes: Routes = [
     {
         path: 'master/parkingConfiguration',
         component:ParkingConfigurations,
+
+    },
+
+
+    // samples
+    {
+        path: 'master/sample1',
+        component:Sample1,
+
+    },
+
+    {
+        path: 'master/sample2',
+        component:Sample2,
 
     },
 ];
