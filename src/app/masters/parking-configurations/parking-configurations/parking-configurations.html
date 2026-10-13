@@ -1,416 +1,321 @@
 <app-shared></app-shared>
 <br><br><br>
 
+
 <div class="min-h-screen bg-slate-100">
 
     <!-- ================= HEADER ================= -->
-    <div class="bg-white border-b border-slate-200 shadow-sm">
-        <div class="px-6 lg:px-10 py-4">
-            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+    <header class="bg-white border-b border-slate-200 shadow-sm">
+        <div class="w-full px-5 lg:px-8 py-5">
 
-                <!-- Left -->
+            <div class="flex flex-col lg:flex-row lg:items-center
+                  lg:justify-between gap-5">
+
                 <div>
-                    <p class="text-sm font-medium text-slate-500">
-                        Master / Parking Configurations
-                    </p>
+                    <div class="flex items-center gap-2 text-sm text-slate-500">
+                        <mat-icon class="!w-4 !h-4 !text-base">
+                            settings
+                        </mat-icon>
+                        <span>Master</span>
+                        <mat-icon class="!w-4 !h-4 !text-base">
+                            chevron_right
+                        </mat-icon>
+                        <span>Parking Configurations</span>
+                    </div>
 
-                    <h1 class="text-2xl lg:text-3xl font-bold text-slate-800 mt-1">
-                        Add Parking Configurations
+                    <h1 class="text-2xl lg:text-3xl font-bold
+                     text-slate-800 mt-2">
+                        {{ updatePage
+                        ? 'Update Parking Configuration'
+                        : 'Add Parking Configuration' }}
                     </h1>
+
+                    <p class="text-sm text-slate-500 mt-2">
+                        Manage branch information and parking facility details.
+                    </p>
                 </div>
 
-                <!-- Right Actions -->
-                <div class="flex items-center gap-3">
+                <div class="flex flex-wrap items-center gap-3">
 
                     <button
+                            mat-stroked-button
                             type="button"
-                            class="inline-flex items-center gap-2
-                   px-5 py-2.5
-                   rounded-lg
-                   bg-blue-600
-                   hover:bg-blue-700
-                   text-white
-                   text-sm font-semibold
-                   shadow-sm
-                   hover:shadow-md
-                   transition-all duration-200
-                   cursor-pointer">
+                            class="!rounded-lg !h-11">
 
-                        <!-- List Icon -->
-                        <svg
-                                class="w-4 h-4"
-                                fill="none"
-                                stroke="currentColor"
-                                viewBox="0 0 24 24">
-
-                            <path
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    stroke-width="2"
-                                    d="M4 6h16M4 12h16M4 18h16" />
-
-                        </svg>
-
+                        <mat-icon>list_alt</mat-icon>
                         Go To Manage
-
-                    </button>
-
-
-                    <button
-                            type="button"
-                            class="inline-flex items-center gap-2
-                   px-6 py-2.5
-                   rounded-lg
-                   bg-gradient-to-r from-emerald-500 to-teal-600
-                   hover:from-emerald-600 hover:to-teal-700
-                   text-white
-                   text-sm font-semibold
-                   shadow-sm
-                   hover:shadow-md
-                   transition-all duration-200
-                   cursor-pointer">
-
-                        <!-- Save Icon -->
-                        <svg
-                                class="w-4 h-4"
-                                fill="none"
-                                stroke="currentColor"
-                                viewBox="0 0 24 24">
-
-                            <path
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    stroke-width="2"
-                                    d="M5 13l4 4L19 7" />
-
-                        </svg>
-
-                        Save Parking Configurations
-
                     </button>
 
                     <button
+                            *ngIf="!updatePage"
+                            mat-flat-button
+                            color="primary"
                             type="button"
-                            class="inline-flex items-center gap-2
-                   px-6 py-2.5
-                   rounded-lg
-                   bg-gradient-to-r from-emerald-500 to-teal-600
-                   hover:from-emerald-600 hover:to-teal-700
-                   text-white
-                   text-sm font-semibold
-                   shadow-sm
-                   hover:shadow-md
-                   transition-all duration-200
-                   cursor-pointer">
+                            (click)="save()"
+                            class="!rounded-lg !h-11">
 
-                        <!-- Save Icon -->
-                        <svg
-                                class="w-4 h-4"
-                                fill="none"
-                                stroke="currentColor"
-                                viewBox="0 0 24 24">
+                        <mat-icon>save</mat-icon>
+                        Save Configuration
+                    </button>
 
-                            <path
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    stroke-width="2"
-                                    d="M5 13l4 4L19 7" />
+                    <button
+                            *ngIf="updatePage"
+                            mat-flat-button
+                            color="primary"
+                            type="button"
+                            class="!rounded-lg !h-11">
 
-                        </svg>
-
-                        Update Parking Configurations
-
+                        <mat-icon>edit</mat-icon>
+                        Update Configuration
                     </button>
 
                 </div>
-
             </div>
         </div>
-    </div>
+    </header>
 
 
+    <!-- ================= MAIN CONTENT ================= -->
+    <main class="w-full max-w-none px-4 sm:px-6 lg:px-8 py-6">
 
-    <form [formGroup]="parking"  class="p-6 lg:p-8">
-        <div class="mb-8">
-
-            <div class="flex items-center gap-2 mb-5">
-
-                <div class="w-1 h-5 rounded-full bg-blue-600"></div>
-
-                <h3 class="text-lg font-bold text-slate-800">
-                    Basic Information
-                </h3>
-
-            </div>
+        <form [formGroup]="parking" class="space-y-6">
 
 
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+            <!-- ================= BASIC INFORMATION ================= -->
+            <mat-card appearance="outlined"
+                      class="!rounded-2xl !border-slate-200 !shadow-sm">
 
+                <!-- Section Heading -->
+                <div class="flex items-center gap-4 p-5 sm:p-6">
 
-                <!-- Branch Name -->
-                <div>
+                    <div class="flex items-center justify-center
+                      w-12 h-12 rounded-xl bg-blue-50
+                      text-blue-600 shrink-0">
+                        <mat-icon>business</mat-icon>
+                    </div>
 
-                    <label
-                            class="block text-sm font-semibold text-slate-700 mb-2">
+                    <div>
+                        <h2 class="text-lg font-bold text-slate-800">
+                            Basic Information
+                        </h2>
 
-                        Branch
-
-                        <span class="text-red-500">*</span>
-
-                    </label>
-
-                    <input formControlName="branch"
-                           type="text"
-                           placeholder="Enter branch name"
-                           class="w-full h-12
-                       px-4
-                       rounded-lg
-                       border border-slate-300
-                       bg-white
-                       text-base
-                       text-slate-800
-                       placeholder:text-slate-400
-                       outline-none
-                       focus:border-blue-500
-                       focus:ring-2
-                       focus:ring-blue-100
-                       transition-all duration-200" />
-
-                </div>
-                <div>
-
-                    <label
-                            class="block text-sm font-semibold text-slate-700 mb-2">
-
-                        Address
-
-                        <span class="text-red-500">*</span>
-
-                    </label>
-
-                    <input formControlName="address"
-                           type="text"
-                           placeholder="Enter branch name"
-                           class="w-full h-12
-                       px-4
-                       rounded-lg
-                       border border-slate-300
-                       bg-white
-                       text-base
-                       text-slate-800
-                       placeholder:text-slate-400
-                       outline-none
-                       focus:border-blue-500
-                       focus:ring-2
-                       focus:ring-blue-100
-                       transition-all duration-200" />
-
-                </div>
-                <div>
-
-                    <label
-                            class="block text-sm font-semibold text-slate-700 mb-2">
-
-                        City
-
-                        <span class="text-red-500">*</span>
-
-                    </label>
-
-                    <input formControlName="city"
-                           type="text"
-                           placeholder="Enter branch name"
-                           class="w-full h-12
-                       px-4
-                       rounded-lg
-                       border border-slate-300
-                       bg-white
-                       text-base
-                       text-slate-800
-                       placeholder:text-slate-400
-                       outline-none
-                       focus:border-blue-500
-                       focus:ring-2
-                       focus:ring-blue-100
-                       transition-all duration-200" />
-
-                </div>
-                <div>
-
-                    <label
-                            class="block text-sm font-semibold text-slate-700 mb-2">
-
-                        Parking Name
-
-                        <span class="text-red-500">*</span>
-
-                    </label>
-
-                    <input formControlName="parkingName"
-                            type="text"
-                            placeholder="Enter branch name"
-                            class="w-full h-12
-                       px-4
-                       rounded-lg
-                       border border-slate-300
-                       bg-white
-                       text-base
-                       text-slate-800
-                       placeholder:text-slate-400
-                       outline-none
-                       focus:border-blue-500
-                       focus:ring-2
-                       focus:ring-blue-100
-                       transition-all duration-200" />
-
-                </div>
-                <div>
-
-                    <label
-                            class="block text-sm font-semibold text-slate-700 mb-2">
-
-                        Parking Type
-
-                        <span class="text-red-500">*</span>
-
-                    </label>
-
-                    <input formControlName="parkingType"
-                            type="text"
-                            placeholder="Enter branch name"
-                            class="w-full h-12
-                       px-4
-                       rounded-lg
-                       border border-slate-300
-                       bg-white
-                       text-base
-                       text-slate-800
-                       placeholder:text-slate-400
-                       outline-none
-                       focus:border-blue-500
-                       focus:ring-2
-                       focus:ring-blue-100
-                       transition-all duration-200" />
-
-                </div>
-                <div>
-
-                    <label
-                            class="block text-sm font-semibold text-slate-700 mb-2">
-
-                       Total Floors
-
-                        <span class="text-red-500">*</span>
-
-                    </label>
-
-                    <input formControlName="totalFloors"
-                            type="text"
-                            placeholder="Enter branch name"
-                            class="w-full h-12
-                       px-4
-                       rounded-lg
-                       border border-slate-300
-                       bg-white
-                       text-base
-                       text-slate-800
-                       placeholder:text-slate-400
-                       outline-none
-                       focus:border-blue-500
-                       focus:ring-2
-                       focus:ring-blue-100
-                       transition-all duration-200" />
-
-                </div>
-                <div>
-
-                    <label
-                            class="block text-sm font-semibold text-slate-700 mb-2">
-
-                        Total Capacity
-
-                        <span class="text-red-500">*</span>
-
-                    </label>
-
-                    <input formControlName="totalCapacity"
-                            type="text"
-                            placeholder="Enter branch name"
-                            class="w-full h-12
-                       px-4
-                       rounded-lg
-                       border border-slate-300
-                       bg-white
-                       text-base
-                       text-slate-800
-                       placeholder:text-slate-400
-                       outline-none
-                       focus:border-blue-500
-                       focus:ring-2
-                       focus:ring-blue-100
-                       transition-all duration-200" />
+                        <p class="text-sm text-slate-500 mt-1">
+                            Enter the branch and parking configuration details.
+                        </p>
+                    </div>
 
                 </div>
 
-                <!-- Slot Prefix -->
-                <div>
-                    <label class="block text-sm font-semibold text-slate-700 mb-2">
-                        Slot Prefix
-                        <span class="text-red-500">*</span>
-                    </label>
+                <mat-divider></mat-divider>
 
-                    <input
-                            formControlName="slotPrefix"
-                            type="text"
-                            placeholder="Enter slot prefix (e.g. P1)"
-                            class="w-full h-12
-           px-4
-           rounded-lg
-           border border-slate-300
-           bg-white
-           text-base
-           text-slate-800
-           placeholder:text-slate-400
-           outline-none
-           focus:border-blue-500
-           focus:ring-2
-           focus:ring-blue-100
-           transition-all duration-200"
-                    />
+
+
+                <div class="p-5 sm:p-6">
+
+                    <div class="grid grid-cols-1 md:grid-cols-2
+                      xl:grid-cols-3 gap-x-6 gap-y-3">
+
+
+
+
+                        <mat-form-field appearance="outline" class="w-full">
+                            <mat-label>Branch</mat-label>
+
+                            <input
+                                    matInput
+                                    type="text"
+                                    formControlName="branch"
+                                    placeholder="Search branch name"
+                                    [matAutocomplete]="branchAuto"
+                            />
+
+                            <mat-autocomplete
+                                #branchAuto="matAutocomplete"
+                                (optionSelected)="onBranchSelected($event)">
+
+                                <mat-option
+                                        *ngFor="let item of branchList"
+                                        [value]="item.branchName">
+
+                                    {{ item.branchName }}
+
+                                </mat-option>
+                            </mat-autocomplete>
+
+
+                            <mat-error *ngIf="parking.get('branch').hasError('required') && parking.get('branch').touched">Branch as Required</mat-error>
+                        </mat-form-field>
+
+
+
+                        <!-- ================= ADDRESS ================= -->
+                        <mat-form-field appearance="outline" class="w-full">
+
+                            <mat-label>Address</mat-label>
+
+                            <input
+                                    matInput
+                                    type="text"
+                                    formControlName="address"
+                                    placeholder="Enter parking address"
+                            />
+
+                            <mat-error
+                                    *ngIf="parking.get('address')?.hasError('required')">
+                                Address is required
+                            </mat-error>
+
+                        </mat-form-field>
+
+
+                        <!-- ================= CITY ================= -->
+                        <mat-form-field appearance="outline" class="w-full">
+
+                            <mat-label>City</mat-label>
+
+                            <input
+                                    matInput
+                                    type="text"
+                                    formControlName="city"
+                                    placeholder="Enter city"
+                            />
+
+                            <mat-error
+                                    *ngIf="parking.get('city')?.hasError('required')">
+                                City is required
+                            </mat-error>
+
+                        </mat-form-field>
+
+
+                        <!-- ================= PARKING NAME ================= -->
+                        <mat-form-field appearance="outline" class="w-full">
+
+                            <mat-label>Parking Name</mat-label>
+
+                            <input
+                                    matInput
+                                    type="text"
+                                    formControlName="parkingName"
+                                    placeholder="Enter parking name"
+                            />
+
+                            <mat-error *ngIf="parking.get('parkingName').hasError('required') && parking.get('parkingName').touched">Parking Name as Required</mat-error>
+
+                        </mat-form-field>
+
+
+                        <!-- ================= PARKING TYPE ================= -->
+                        <mat-form-field appearance="outline" class="w-full">
+
+                            <mat-label>Parking Type</mat-label>
+
+                            <mat-select formControlName="parkingType">
+
+                                <mat-option value="">
+                                    Select parking type
+                                </mat-option>
+
+                                <mat-option value="open">
+                                    Open Parking
+                                </mat-option>
+
+                                <mat-option value="covered">
+                                    Covered Parking
+                                </mat-option>
+
+                                <mat-option value="underground">
+                                    Underground Parking
+                                </mat-option>
+
+                                <mat-option value="multi-level">
+                                    Multi-Level Parking
+                                </mat-option>
+
+                            </mat-select>
+
+                            <mat-error *ngIf="parking.get('parkingType').hasError('required') && parking.get('parkingType').touched">ParkingType as Required</mat-error>
+
+
+
+                        </mat-form-field>
+
+
+                        <!-- ================= TOTAL FLOORS ================= -->
+                        <mat-form-field appearance="outline" class="w-full">
+
+                            <mat-label>Total Floors</mat-label>
+                            <input
+                                    matInput
+                                    type="number"
+                                    min="1"
+                                    formControlName="totalFloors"
+                                    placeholder="Enter number of floors"
+                            />
+
+                            <mat-error *ngIf="parking.get('totalFloors').hasError('required') && parking.get('totalFloors').touched">TotalFloors as Required</mat-error>
+
+
+                        </mat-form-field>
+
+
+                        <!-- ================= TOTAL CAPACITY ================= -->
+                        <mat-form-field appearance="outline" class="w-full">
+
+                            <mat-label>Total Capacity</mat-label>
+
+
+                            <input
+                                    matInput
+                                    type="number"
+                                    min="1"
+                                    formControlName="totalCapacity"
+                                    placeholder="Enter total capacity"
+                            />
+
+                            <mat-hint>
+                                Total available parking slots
+                            </mat-hint>
+
+                            <mat-error *ngIf="parking.get('totalCapacity').hasError('required') && parking.get('totalCapacity').touched">TotalCapacity as Required</mat-error>
+
+
+                        </mat-form-field>
+
+
+                        <mat-form-field appearance="outline" class="w-full">
+
+                            <mat-label>Status</mat-label>
+                            <mat-select formControlName="status">
+
+                                <mat-option value="active">
+                  <span class="inline-flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-green-500"></span>
+                    Active
+                  </span>
+                                </mat-option>
+
+                                <mat-option value="inactive">
+                  <span class="inline-flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-red-500"></span>
+                    Inactive
+                  </span>
+                                </mat-option>
+
+                            </mat-select>
+
+                            <mat-error
+                                    *ngIf="parking.get('status')?.hasError('required')">
+                                Status is required
+                            </mat-error>
+
+                        </mat-form-field>
+
+
+                    </div>
                 </div>
+            </mat-card>
 
-                <div>
-
-                    <label
-                            class="block text-sm font-semibold text-slate-700 mb-2">
-
-                      Status
-
-                        <span class="text-red-500">*</span>
-
-                    </label>
-
-                    <input formControlName="status"
-                            type="text"
-                            placeholder="Enter branch name"
-                            class="w-full h-12
-                       px-4
-                       rounded-lg
-                       border border-slate-300
-                       bg-white
-                       text-base
-                       text-slate-800
-                       placeholder:text-slate-400
-                       outline-none
-                       focus:border-blue-500
-                       focus:ring-2
-                       focus:ring-blue-100
-                       transition-all duration-200" />
-
-                </div>
-            </div>
-
-        </div>
-    </form>
-
+        </form>
+    </main>
 </div>

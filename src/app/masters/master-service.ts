@@ -36,18 +36,10 @@ export class MasterService {
     );
   }
 
-//   sample api
 
 
-   getUser(){
-    return this.http.get('https://jsonplaceholder.typicode.com/users');
-   }
 
-  getAlbums(){
-    return this.http.get('https://jsonplaceholder.typicode.com/albums?userId=1');
-  }
-
-  gettodos(){
-    return this.http.get('https://jsonplaceholder.typicode.com/todos?userId=1');
+  saveParkingConfiguration(data:any):Observable<any> {
+    return this.http.post(env.apiUrl +'master/save/parkingConfiguration',data);
   }
 }
