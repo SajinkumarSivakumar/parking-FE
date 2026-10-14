@@ -13,6 +13,9 @@ import {ParkingConfigurations} from "./masters/parking-configurations/parking-co
 import {Sample1} from "./masters/sample/sample1/sample1";
 import {Sample2} from "./masters/sample/sample2/sample2";
 import {DashboardSystem} from "./dashboard/dashboard-system/dashboard-system";
+import {
+    ParkingConfigurationsManage
+} from "./masters/parking-configurations/parking-configurations-manage/parking-configurations-manage";
 
 export const routes: Routes = [
 
@@ -76,6 +79,18 @@ export const routes: Routes = [
 
     {
         path: 'master/parkingConfiguration',
+        component:ParkingConfigurations,
+
+    },
+
+    {
+        path: 'master/parkingConfiguration/manage',
+        component:ParkingConfigurationsManage,
+
+    },
+
+    {
+        path: 'master/parkingConfiguration/:id',
         component:ParkingConfigurations,
 
     },

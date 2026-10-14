@@ -42,4 +42,9 @@ export class MasterService {
   saveParkingConfiguration(data:any):Observable<any> {
     return this.http.post(env.apiUrl +'master/save/parkingConfiguration',data);
   }
+
+
+  getAllParkingConfigDetails(){
+    return this.http.get(env.apiUrl +'master/getAllParkingConfigDetails');
+  }
 }

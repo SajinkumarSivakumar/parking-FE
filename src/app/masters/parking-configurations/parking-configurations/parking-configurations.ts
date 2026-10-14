@@ -14,6 +14,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatCardModule } from '@angular/material/card';
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-parking-configurations',
@@ -43,6 +44,7 @@ export class ParkingConfigurations implements OnInit{
   updatePage:boolean=false;
   branchList:any=[];
   branchListOg:any=[];
+  id:any;
 
 
   constructor(private fb:FormBuilder,private ms:MasterService,private route:Router,private activated:ActivatedRoute) {
@@ -60,6 +62,11 @@ export class ParkingConfigurations implements OnInit{
       address:['']
 
     });
+
+    this.id = this.activated.snapshot.paramMap.get('id');
+    if(this.id){
+      this.updatePage = true;
+    }
 
     this.apiCallFunc();
   }
@@ -110,22 +117,61 @@ export class ParkingConfigurations implements OnInit{
 
 
 
-  save(){
+
+
+
+  save() {
 
     if(this.parking.invalid){
       this.parking.markAsTouched();
-
+      Swal.fire({
+        icon: 'warning',
+        title: 'Required Fields',
+        text: 'Please fill all required fields.',
+        confirmButtonText: 'OK'
+      });
       return;
     }
 
 
     const formValue = this.parking.getRawValue();
 
-     this.ms.saveParkingConfiguration(formValue).subscribe((res:any)=>{
+    this.ms.saveParkingConfiguration(formValue).subscribe({
 
-     })
+      next: (res: any) => {
+
+        Swal.fire({
+          icon: 'success',
+          title: 'Success!',
+          text: 'Parking Configurations saved successfully.',
+          confirmButtonText: 'OK'
+        }).then(() => {
+
+
+          this.parking.reset();
+
+
+
+        });
+
+      },
+
+      error: (err: any) => {
+
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops!',
+          text: err?.error?.message || 'Something went wrong while saving the branch.',
+          confirmButtonText: 'OK'
+        });
+
+      }
+
+    });
 
   }
 
-  protected readonly parent = parent;
+  goToManage(){
+    this.route.navigateByUrl('/master/parkingConfiguration/manage')
+  }
 }
