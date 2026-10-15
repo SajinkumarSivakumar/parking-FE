@@ -66,6 +66,10 @@ export class ParkingConfigurations implements OnInit{
     this.id = this.activated.snapshot.paramMap.get('id');
     if(this.id){
       this.updatePage = true;
+      this.ms.getPatchParkingDetails(this.id).subscribe((res:any)=>{
+        this.parking.patchValue(res)
+
+      })
     }
 
     this.apiCallFunc();
@@ -169,6 +173,15 @@ export class ParkingConfigurations implements OnInit{
 
     });
 
+  }
+
+  update(){
+
+    const formValue = this.parking.getRawValue();
+
+     this.ms.updateParkingConfigurations(this.id,formValue).subscribe((res:any)=>{
+
+     })
   }
 
   goToManage(){

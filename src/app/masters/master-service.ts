@@ -47,4 +47,29 @@ export class MasterService {
   getAllParkingConfigDetails(){
     return this.http.get(env.apiUrl +'master/getAllParkingConfigDetails');
   }
+
+
+
+  getPatchParkingDetails(id: any): Observable<any> {
+    return this.http.get(
+        env.apiUrl + 'master/getPatchParkingDetails',
+        {
+          params: { id: id }
+        }
+    );
+  }
+
+
+
+
+
+  updateParkingConfigurations(id: string, data: any) {
+    return this.http.put(
+        `${env.apiUrl}master/update/parkingConfiguration/${id}`,
+        data
+    );
+  }
+
+
+
 }
